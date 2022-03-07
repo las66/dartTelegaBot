@@ -13,5 +13,5 @@ void main() async {
 
   teledart
       .onCommand(RegExp('hello', caseSensitive: false))
-      .listen((message) => message.reply('hi!'));
+      .listen((message) => message.reply('hi2!'));
 }
