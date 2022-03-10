@@ -1,10 +1,11 @@
-import 'dart:io';
-
+import 'package:dartTelegaBot/secrets.dart' as secret;
 import 'package:teledart/teledart.dart';
 import 'package:teledart/telegram.dart';
 
+import 'MaxBtc.dart';
+
 void main() async {
-  final botToken = await File('../bot_token.txt').readAsString();
+  final botToken = secret.botToken;
   final username = (await Telegram(botToken).getMe()).username;
 
   var teledart = TeleDart(botToken, Event(username!));
@@ -13,5 +14,11 @@ void main() async {
 
   teledart
       .onCommand(RegExp('hello', caseSensitive: false))
-      .listen((message) => message.reply('hello3!'));
+      .listen((message) => message.reply('hello!'));
+
+  teledart
+      .onCommand(RegExp('maxbtc', caseSensitive: false))
+      .listen((message) async {
+    await message.reply(await maxBtc());
+  });
 }

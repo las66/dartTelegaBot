@@ -2,5 +2,8 @@
 .packages
 build/
 doc/api/
+
 .idea
 *.iml
+
+/lib/secrets.dart
