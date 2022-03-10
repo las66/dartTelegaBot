@@ -17,6 +17,10 @@ void main() async {
       .listen((message) => message.reply('hello!'));
 
   teledart
+      .onCommand(RegExp('help', caseSensitive: false))
+      .listen((message) => message.reply('К вам выехал наряд'));
+
+  teledart
       .onCommand(RegExp('maxbtc', caseSensitive: false))
       .listen((message) async {
     await message.reply(await maxBtc());
