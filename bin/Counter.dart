@@ -1,17 +1,19 @@
 import 'Database.dart';
 
+var info = 'Правильное использование:'
+    '\n  /команда переменная_безПробелов'
+    '\n'
+    '\nКомманды:'
+    '\n  count++, count--, count'
+    '\n'
+    '\nПример: '
+    '\n  /count++ умников_в_чате';
+
 Future<String> processCommand(String command) async {
   var commandList = command.split(' ');
   commandList.removeWhere((it) => it == '');
   if (commandList.length != 2) {
-    return 'Правильное использование:'
-        '\n  /команда переменная_безПробелов'
-        '\n'
-        '\nКомманды:'
-        '\n  count++, count--, count'
-        '\n'
-        '\nПример: '
-        '\n  /count++ умников_в_чате';
+    return info;
   }
   var count = 0;
   switch (commandList[0].toLowerCase()) {
@@ -27,7 +29,7 @@ Future<String> processCommand(String command) async {
       count = bdCount ?? 0;
       break;
     default:
-      return '';
+      return info;
   }
   return 'Количество ${commandList[1]} = $count';
 }
