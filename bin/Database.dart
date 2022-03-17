@@ -2,6 +2,7 @@ import 'package:dartTelegaBot/secrets.dart' as secret;
 import 'package:postgres/postgres.dart';
 
 class Database {
+  // todo сделать пулл коннекшенов
   static final PostgreSQLConnection connection = PostgreSQLConnection(
       secret.host, secret.postgresPort, secret.postgresDatabaseName,
       username: secret.postgresUsername, password: secret.postgresPassword);
@@ -10,6 +11,7 @@ class Database {
     await connection.open();
   }
 
+  // todo Переделать на insert ... on duplicate key update
   static Future<int> countPlus1(String varName) async {
     var result = await connection.transaction((ctx) async {
       var varCount = await count(varName, ctx);
