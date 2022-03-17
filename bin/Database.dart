@@ -43,7 +43,7 @@ class Database {
   static Future<int?> count(String varName, [PostgreSQLExecutionContext? conn]) async {
     conn ??= connection;
     List<List<dynamic>> results = await conn
-        .query('SELECT var_count FROM counter WHERE var_name = @varName', substitutionValues: {'varName': varName});
+        .query('SELECT var_count FROM counter WHERE var_name = @varName FOR UPDATE', substitutionValues: {'varName': varName});
     if (results.isEmpty) {
       return null;
     }
