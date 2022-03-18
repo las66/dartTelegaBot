@@ -9,6 +9,7 @@ dev_dependencies:
 
 dependencies: 
   convert: ^3.0.1
+  html: ^0.15.0
   http: ^0.13.4
   postgres: ^2.4.3
   teledart: ^0.3.2 
