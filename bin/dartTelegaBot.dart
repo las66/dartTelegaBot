@@ -34,4 +34,8 @@ void main() async {
   teledart.onCommand(RegExp('anek|anekdot', caseSensitive: false)).listen((message) async {
     await message.reply(await randomAnek());
   });
+
+  teledart.onCommand(RegExp('banek|anekb', caseSensitive: false)).listen((message) async {
+    await message.reply(await randomBanek());
+  });
 }
