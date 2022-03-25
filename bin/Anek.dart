@@ -18,6 +18,8 @@ Future<String> randomAnek() async {
       var str = node.text;
       result += str == '' ? '\n' : str!;
     }
+  } else {
+    print('ERROR: $response');
   }
   return result;
 }
@@ -29,10 +31,16 @@ Future<String> randomBanek() async {
 
   var result = '';
   if (response2.statusCode == 200) {
-    result = parse(convertFromUtf8Bytes(response2.bodyBytes))
-        .head!
-        .querySelector('meta[name=description]')!
-        .attributes['content']!;
+    var nodes = parse(convertFromUtf8Bytes(response2.bodyBytes))
+        .body!
+        .querySelector('section[class=anek-view]')!
+        .getElementsByTagName('article')[0]
+        .getElementsByTagName('p')[0]
+        .nodes;
+    for (var node in nodes) {
+      var str = node.text;
+      result += str!;
+    }
   } else {
     print('ERROR: $response2');
   }
