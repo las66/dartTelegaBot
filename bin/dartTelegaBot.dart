@@ -2,10 +2,10 @@ import 'package:dartTelegaBot/secrets.dart' as secret;
 import 'package:teledart/teledart.dart';
 import 'package:teledart/telegram.dart';
 
-import 'Anek.dart';
-import 'Counter.dart' as counter;
 import 'Database.dart';
-import 'MaxBtc.dart';
+import 'commands/Anek.dart';
+import 'commands/Counter.dart' as counter;
+import 'commands/MaxBtc.dart';
 
 void main() async {
   final botToken = secret.botToken;

@@ -1,4 +1,4 @@
-import 'Database.dart';
+import '../Database.dart';
 
 var info = 'Правильное использование:'
     '\n  /команда переменная_безПробелов'

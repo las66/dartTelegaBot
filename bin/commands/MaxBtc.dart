@@ -1,4 +1,4 @@
-import 'ExchangeRate.dart';
+import '../ExchangeRate.dart';
 
 final _btcAmount = 0.04423945;
 
