@@ -1,35 +1,38 @@
 import '../Database.dart';
 
-var info = 'Правильное использование:'
-    '\n  /команда переменная_безПробелов'
+final info = '*Команда count*'
+    '\nПрибавляет/убавляет значение требуемой переменной на 1'
     '\n'
-    '\nКомманды:'
-    '\n  count++, count--, count'
-    '\n'
-    '\nПример: '
-    '\n  /count++ умников_в_чате';
+    '\nПример использования:'
+    '\n`/count\\\+\\\+ умников в чате`'
+    '\n`/count\\\-\\\- какая\\\-то\\\_переменная`'
+    '\n`/count myVar`'
+    '\n`@Bizmolbot можно выбрать тут`';
 
-Future<String> processCommand(String command) async {
-  var commandList = command.split(' ');
-  commandList.removeWhere((it) => it == '');
-  if (commandList.length != 2) {
-    return info;
+Future<String?> processCommand(String command) async {
+  var indexOfFirstSpace = command.indexOf(' ');
+  if (indexOfFirstSpace == -1) {
+    return null;
   }
-  var count = 0;
-  switch (commandList[0].toLowerCase()) {
+  var varName = command.substring(indexOfFirstSpace + 1);
+  if (varName.isEmpty) {
+    return null;
+  }
+  var varCount;
+  switch (command.substring(0, indexOfFirstSpace)) {
     case '/count++':
-      count = await Database.countPlus1(commandList[1]);
+      varCount = await Database.countPlus1(varName);
       break;
     case '/count--':
     case '/count—':
-      count = await Database.countMinus1(commandList[1]);
+      varCount = await Database.countMinus1(varName);
       break;
     case '/count':
-      var bdCount = await Database.count(commandList[1]);
-      count = bdCount ?? 0;
+      var bdCount = await Database.count(varName);
+      varCount = bdCount ?? 0;
       break;
     default:
-      return info;
+      return null;
   }
-  return 'Количество ${commandList[1]} = $count';
+  return 'Количество $varName = $varCount';
 }
