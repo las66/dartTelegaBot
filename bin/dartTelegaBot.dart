@@ -35,27 +35,6 @@ void main() async {
     }
   });
 
-  teledart.onInlineQuery().listen((inlineQuery) async => inlineQuery.answer([
-        if (inlineQuery.query.isNotEmpty)
-          InlineQueryResultArticle(
-              id: 'count++',
-              title: '${inlineQuery.query}++',
-              input_message_content: InputTextMessageContent(
-                  message_text: (await counter.processCommand('/count++ ${inlineQuery.query}'))!)),
-        if (inlineQuery.query.isNotEmpty)
-          InlineQueryResultArticle(
-              id: 'count--',
-              title: '${inlineQuery.query}--',
-              input_message_content: InputTextMessageContent(
-                  message_text: (await counter.processCommand('/count-- ${inlineQuery.query}'))!)),
-        if (inlineQuery.query.isNotEmpty)
-          InlineQueryResultArticle(
-              id: 'count',
-              title: 'Количество ${inlineQuery.query}',
-              input_message_content: InputTextMessageContent(
-                  message_text: (await counter.processCommand('/count ${inlineQuery.query}'))!)),
-      ], cache_time: 0));
-
   teledart.onCommand('anek').listen((message) async {
     await message.reply(await randomAnek());
   });

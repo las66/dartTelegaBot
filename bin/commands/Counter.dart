@@ -6,8 +6,7 @@ final info = '*Команда count*'
     '\nПример использования:'
     '\n`/count\\\+\\\+ умников в чате`'
     '\n`/count\\\-\\\- какая\\\-то\\\_переменная`'
-    '\n`/count myVar`'
-    '\n`@Bizmolbot можно выбрать тут`';
+    '\n`/count myVar`';
 
 Future<String?> processCommand(String command) async {
   var indexOfFirstSpace = command.indexOf(' ');
