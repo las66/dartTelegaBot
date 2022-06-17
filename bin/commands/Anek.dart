@@ -27,12 +27,22 @@ Future<String> randomAnek() async {
 }
 
 Future<String> randomBanek() async {
-  var req = http.Request('Get', Uri.parse('https://baneks.ru/random'))..followRedirects = false;
-  var response = await http.Client().send(req);
-  final response2 = await http.Client().get(Uri.parse(response.headers['location']!));
-
+  var response;
+  for (var i = 0; i < 13; i++) {
+    var req = http.Request('Get', Uri.parse('https://baneks.ru/random'))..followRedirects = false;
+    response = await http.Client().send(req);
+    if (response.headers['location'] != null) {
+      break;
+    }
+  }
+  var response2;
   var result = '';
-  if (response2.statusCode == 200) {
+  if (response.headers['location'] != null) {
+    response2 = await http.Client().get(Uri.parse(response.headers['location']!));
+  } else {
+    result = 'Что-то не так. Хмм....';
+  }
+  if (response2?.statusCode == 200) {
     var nodes = parse(_convertFromUtf8Bytes(response2.bodyBytes))
         .body!
         .querySelector('section[class=anek-view]')!
@@ -44,7 +54,7 @@ Future<String> randomBanek() async {
       result += str!;
     }
   } else {
-    print('ERROR: $response2');
+    print('ERROR: ${response2 ?? response}');
   }
   return result;
 }
